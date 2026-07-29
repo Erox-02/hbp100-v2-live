@@ -58,6 +58,7 @@ function App() {
       }
 
       const data = await response.json()
+      console.log('🔍 Backend Response:', JSON.stringify(data, null, 2))
       setResult(data)
     } catch (err) {
       setError(err.message)
@@ -164,7 +165,7 @@ function App() {
               <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
                 {[
                   'User Prompt',
-                  usePrivacy ? 'Pield Sanitizer (ON)' : 'Pield Sanitizer (OFF)',
+                  usePrivacy ? 'PII Sanitizer (ON)' : 'PII Sanitizer (OFF)',
                   usePrivacy ? 'Masked Prompt' : 'Raw Prompt',
                   useRealLLM ? 'Groq LLM (BETA)' : 'Mock LLM',
                   'Response',
@@ -174,7 +175,7 @@ function App() {
                   <div key={i} className="flex items-center">
                     <span className={`px-2 sm:px-3 py-1 rounded-full text-gray-300 ${
                       step === 'Groq LLM (BETA)' ? 'bg-yellow-600/20 border border-yellow-500/50' : 
-                      step === 'Pield Sanitizer (ON)' ? 'bg-emerald-600/20 border border-emerald-500/50' :
+                      step === 'PII Sanitizer (ON)' ? 'bg-emerald-600/20 border border-emerald-500/50' :
                       'bg-gray-800'
                     }`}>
                       {step}
@@ -185,15 +186,21 @@ function App() {
               </div>
             </div>
 
-            {usePrivacy && result.has_pii && (
+            {usePrivacy && result.has_pii === true && (
               <div className="p-4 rounded-lg border bg-emerald-950/30 border-emerald-800/50 text-emerald-400">
-                <span className="font-semibold">PII Detected and Masked</span>
+                <span className="font-semibold">✅ PII Detected and Masked</span>
               </div>
             )}
 
-            {usePrivacy && !result.has_pii && (
+            {usePrivacy && result.has_pii === false && (
               <div className="p-4 rounded-lg border bg-gray-800/30 border-gray-700 text-gray-400">
                 <span className="font-semibold">✓ No PII Detected</span>
+              </div>
+            )}
+
+            {usePrivacy && result.has_pii === undefined && (
+              <div className="p-4 rounded-lg border bg-yellow-950/30 border-yellow-800/50 text-yellow-400">
+                <span className="font-semibold">⚠️ PII status unknown</span>
               </div>
             )}
 
@@ -204,11 +211,19 @@ function App() {
             )}
 
             <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-              <ResultCard title="Original Prompt" data={result.original_prompt} type="original" />
+              <ResultCard 
+                title="Original Prompt" 
+                data={result.original_prompt || 'No data'} 
+                type="original" 
+              />
               {usePrivacy && (
-                <ResultCard title="Masked Prompt" data={result.masked_prompt} type="masked" />
+                <ResultCard 
+                  title="Masked Prompt" 
+                  data={result.masked_prompt || 'No data'} 
+                  type="masked" 
+                />
               )}
-              {usePrivacy && (
+              {usePrivacy && result.metadata && (
                 <MetadataViewer metadata={result.metadata} />
               )}
               <ResultCard 
@@ -227,7 +242,7 @@ function App() {
               />
             )}
 
-            {!sePrivacy && (
+            {!usePrivacy && (
               <ResultCard
                 title="Final Response (Raw)"
                 data={result.llm_response_masked || 'No response'}
@@ -241,7 +256,7 @@ function App() {
 
       <footer className="border-t border-gray-800 mt-12 sm:mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 text-center text-xs sm:text-sm text-gray-600">
-          <p>Hbp100 Privacy Firewall — Ultra-light LLM Privacy Protection</p>
+          <p>HBP100 Privacy Firewall — Ultra-light LLM Privacy Protection</p>
           <p className="mt-1">Built by Erox-02 using hbp100</p>
         </div>
       </footer>
