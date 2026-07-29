@@ -21,7 +21,7 @@ function PromptInput({ onSubmit, loading, onWarmup }) {
   
 {
   title: "Hospital Discharge Example",
-  text: `Patient John Doe (MRN: 48291) was admitted to City General Hospital with Type 2 Diabetes Mellitus and mild dehydration.
+  text: `Patient Jayanti Patra (MRN: 48291) was admitted to City General Hospital with Type 2 Diabetes Mellitus and mild dehydration.
 
 Laboratory findings showed HbA1c of 8.2% and blood glucose of 198 mg/dL.
 
@@ -37,7 +37,7 @@ Explain the discharge instructions in simple language and create a checklist ..`
 },
 {
   title: "Insurance Approval Example",
-  text: `Patient Michael Brown (MRN: 59382) recently completed treatment for asthma and hyperlipidemia.
+  text: `Patient Sam Mahato (MRN: 59382) recently completed treatment for asthma and hyperlipidemia.
 
 Current medications include Atorvastatin 20 mg once daily and an Albuterol inhaler as needed.
 
