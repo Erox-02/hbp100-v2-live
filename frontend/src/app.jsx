@@ -155,7 +155,6 @@ function App() {
 
         {loading && <LoadingSpinner />}
 
-        {/* Added id="results" to the results container */}
         {result && !loading && (
           <div id="results" className="mt-6 sm:mt-8 space-y-4 sm:space-y-6 animate-fade-in">
             <div className="bg-gray-950/50 rounded-lg p-4 sm:p-6 border border-gray-800">
@@ -228,7 +227,7 @@ function App() {
               />
             )}
 
-            {!usePrivacy && (
+            {!sePrivacy && (
               <ResultCard
                 title="Final Response (Raw)"
                 data={result.llm_response_masked || 'No response'}
@@ -238,7 +237,6 @@ function App() {
             )}
           </div>
         )}
-        </div>
       </main>
 
       <footer className="border-t border-gray-800 mt-12 sm:mt-16">
