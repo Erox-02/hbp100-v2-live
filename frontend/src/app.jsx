@@ -238,25 +238,6 @@ function App() {
             )}
           </div>
         )}
-
-        <div className="mt-12 sm:mt-16">
-          <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 text-white">
-            Benchmarks
-          </h2>
-          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-            {[
-              { label: 'Package Size', value: '590 KB', icon: '📦' },
-              { label: 'Predictions/sec', value: '7367', icon: '🚀' },
-              { label: 'F1 Score', value: '91%', icon: '📊' },
-              { label: 'Latency', value: '0.136 ms', icon: '⚡' },
-            ].map((bench, i) => (
-              <div key={i} className="bg-gray-950 rounded-lg p-3 sm:p-6 border border-gray-800 card-glow text-center">
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{bench.icon}</div>
-                <div className="text-base sm:text-2xl font-bold text-gray-200">{bench.value}</div>
-                <div className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">{bench.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </main>
 
