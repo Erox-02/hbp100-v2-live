@@ -61,7 +61,7 @@ User message:
     
     try:
         completion = groq_client.chat.completions.create(
-            model=""openai/gpt-oss-120b",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_message}
